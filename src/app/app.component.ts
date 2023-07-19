@@ -26,7 +26,7 @@ export class AppComponent {
       cnpj: ['', ValidacaoBrasil.cnpj()],
       cep: ['', ValidacaoBrasil.cep()],
       telefone: ['', ValidacaoBrasil.telefone(false)],
-      celular: ['', ValidacaoBrasil.celular(true, false)]
+      celular: ['', ValidacaoBrasil.celular(true, true, true)]
     })
   }
 

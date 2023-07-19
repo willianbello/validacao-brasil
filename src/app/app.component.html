@@ -18,7 +18,7 @@
 
     <div>
       <p>Celular</p>
-      <input type="text" formControlName="celular" placeholder="celular" bCelular [ddd]="false">
+      <input type="text" formControlName="celular" placeholder="celular" bCelular [ddd]="false" [ddd3Digitos]="true">
       <br><br>
       <span *ngIf="form.get('celular')?.hasError('celular')">celular inválido</span><br>
       <span *ngIf="form.get('celular')?.hasError('required')">celular requerido</span>
