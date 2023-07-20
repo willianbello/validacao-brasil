@@ -1,4 +1,4 @@
-# BrasilValidation
+# Validação Brasil
 
 Contem pipes / directives / validators / Angular
 
@@ -9,36 +9,65 @@ todo o código foi criado com Typescript e Javascript puro para evitar outras de
 
 Atualmente tem as seguintes opções:
 
-Validações:
+### Validações:
 CPF
 CNPJ
 CEP
 Telefone
 Celular
 
-Pipes:
+### Pipes:
 CPF
 CNPJ
 CEP
 Telefone
 Celular
 
-Diretivas:
+### Diretivas:
 CPF
 CNPJ
 CEP
 Telefone
 Celular
 
-Sobre Validações: 
+## Importação
+    import { NgModule } from '@angular/core';
+    import { BrowserModule } from '@angular/platform-browser';
+    
+    import { AppComponent } from './app.component';
+    
+    import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+    import { ValidacaoBrasilModule } from 'validacao-brasil';
+    
+    @NgModule({
+      declarations: [
+        AppComponent
+      ],
+      imports: [
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ValidacaoBrasilModule
+      ],
+      providers: [],
+      bootstrap: [AppComponent]
+    })
+    export class AppModule { }
 
-this.form = this.fb.group({
-      cpf: ['', ValidacaoBrasil.cpf()],
-      cnpj: ['', ValidacaoBrasil.cnpj()],
-      cep: ['', ValidacaoBrasil.cep()],
-      telefone: ['', ValidacaoBrasil.telefone(false)],
-      celular: ['', ValidacaoBrasil.celular(true, false)]
-});
+
+
+
+
+## Sobre Validações:
+    import { ValidacaoBrasil } from 'validacao-brasil';
+    
+    this.form = this.fb.group({
+    	cpf: ['', ValidacaoBrasil.cpf()],
+    	cnpj: ['', ValidacaoBrasil.cnpj()],
+    	cep: ['', ValidacaoBrasil.cep()],
+    	telefone: ['', ValidacaoBrasil.telefone(false)],
+    	celular: ['', ValidacaoBrasil.celular(true, true, true)]
+    })
 
 o primeiro parâmetro de todas as validações é se ele é "required" ou não.
 se for "required" e houver erro ira retorna um objeto { required: true }.
@@ -51,24 +80,58 @@ cnpj => { cnpj: true }
 cep => { cep: true }
 telefone => { telefone: true }
 celular => { celular: true }
-OBS: para o celular há uma validação adicional que é a verificação de começar com 9
-será enviado o objeto: { nove: true } quando ele não começar com 9.
 
-FIQUE ATENTO A VARIÁVEL "TEM DDD" E "DDD3DIGITOS" TANTO NO FORMS QUANTO NO ELEMENTO HTML SE FOR UTILIZAR MASCARA.
+OBS: para o celular há uma validação adicional que é a verificação de começar com 9
+será enviado o objeto: *{ nove: true }* quando ele não começar com 9.
+
+***FIQUE ATENTO A VARIÁVEL "TEM DDD" E "DDD3DIGITOS" TANTO NO FORMS QUANTO NO ELEMENTO HTML SE FOR UTILIZAR MASCARA.***
 
 No caso dos telefones há mais configurações disponíveis como:
 tem ddd?
   segundo parâmetro (boolean)
 o ddd tem 3 dígitos?
   terceiro parâmetro (boolean)
+
+    celular: ['', ValidacaoBrasil.celular(true, true, true)]
+
+<div>
+    <div>
+      cpf: 48103288055 | {{ '48103288055' | cpf }}
+      cnpj: 76601670000125 | {{ '76601670000125' | cnpj }}
+      cep: 77064202 | {{ '77064202' | cep }}
+    </div>
+    <div>
+      telefone: 5131234567 | {{ '5131234567' | telefone }}
+      telefone: 05131234567 | {{ '05131234567' | telefone:true:true }}
+      telefone: 31234567 | {{ '31234567' | telefone:false }}
+    </div>
+    <div>
+      celular: 51991234567 | {{ '51991234567' | celular }}
+      celular: 051991234567 | {{ '051991234567' | celular:true:true }}
+      celular: 991234567 | {{ '991234567' | celular:false }}
+    </div>
+  </div>
   
-celular: ['', ValidacaoBrasil.celular(true, true, true)]
-
-![image](https://github.com/willianbello/validacao-brasil/assets/38074391/319825b4-bc9d-47a9-bf7f-219a3a9abacf)
-
-![image](https://github.com/willianbello/validacao-brasil/assets/38074391/c1b407e7-98a9-4e07-9c4d-2d34c0e49e6c)
-
-![image](https://github.com/willianbello/validacao-brasil/assets/38074391/440e9490-f790-42d4-a2ee-520df9a2d048)
-
-![image](https://github.com/willianbello/validacao-brasil/assets/38074391/6726d1fc-dad5-4f7a-a367-08d5bfb0fdf1)
-
+      <div>
+          <p>Celular</p>
+          <input type="text" formControlName="celular" 
+     placeholder="celular" bCelular [ddd]="false" [ddd3Digitos]="true">
+          
+          <span *ngIf="form.get('celular')?.hasError('celular')">celular inválido</span><br>
+          <span *ngIf="form.get('celular')?.hasError('required')">celular requerido</span>
+          <span *ngIf="form.get('celular')?.hasError('nove')">celular precisa começar com 9</span>
+        
+          <p>Telefone</p>
+          <input type="text" formControlName="telefone" placeholder="telefone" bTelefone>
+          
+          <span *ngIf="form.get('telefone')?.hasError('telefone')">telefone inválido</span><br>
+          <span *ngIf="form.get('telefone')?.hasError('required')">telefone requerido</span>
+        </div>
+    
+        <div>
+          <p>CEP</p>
+          <input type="text" formControlName="cep" placeholder="cep" id="cep" bCep>
+          <br><br>
+          <span *ngIf="form.get('cep')?.hasError('cep')">cep inválido</span><br>
+          <span *ngIf="form.get('cep')?.hasError('required')">cep requerido</span>
+        </div>

@@ -1,4 +1,4 @@
-# BrasilValidation
+# Validação Brasil
 
 Contem pipes / directives / validators / Angular
 
@@ -9,35 +9,64 @@ todo o código foi criado com Typescript e Javascript puro para evitar outras de
 
 Atualmente tem as seguintes opções:
 
-Validações:
+### Validações:
 CPF
 CNPJ
 CEP
 Telefone
 Celular
 
-Pipes:
+### Pipes:
 CPF
 CNPJ
 CEP
 Telefone
 Celular
 
-Diretivas:
+### Diretivas:
 CPF
 CNPJ
 CEP
 Telefone
 Celular
 
-Sobre Validações:
+## Importação
+    import { NgModule } from '@angular/core';
+    import { BrowserModule } from '@angular/platform-browser';
+    
+    import { AppComponent } from './app.component';
+    
+    import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+    import { ValidacaoBrasilModule } from 'validacao-brasil';
+    
+    @NgModule({
+      declarations: [
+        AppComponent
+      ],
+      imports: [
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ValidacaoBrasilModule
+      ],
+      providers: [],
+      bootstrap: [AppComponent]
+    })
+    export class AppModule { }
 
+
+
+
+
+## Sobre Validações:
+    import { ValidacaoBrasil } from 'validacao-brasil';
+    
     this.form = this.fb.group({
-          cpf: ['', ValidacaoBrasil.cpf()],
-          cnpj: ['', ValidacaoBrasil.cnpj()],
-          cep: ['', ValidacaoBrasil.cep()],
-          telefone: ['', ValidacaoBrasil.telefone(false)],
-          celular: ['', ValidacaoBrasil.celular(true, true, true)]
+    	cpf: ['', ValidacaoBrasil.cpf()],
+    	cnpj: ['', ValidacaoBrasil.cnpj()],
+    	cep: ['', ValidacaoBrasil.cep()],
+    	telefone: ['', ValidacaoBrasil.telefone(false)],
+    	celular: ['', ValidacaoBrasil.celular(true, true, true)]
     })
 
 o primeiro parâmetro de todas as validações é se ele é "required" ou não.
