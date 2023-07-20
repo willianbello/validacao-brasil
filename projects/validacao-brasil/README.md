@@ -1,24 +1,74 @@
-# ValidacaoBrasil
+# BrasilValidation
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.0.
+Contem pipes / directives / validators / Angular
 
-## Code scaffolding
+Suporte para o Angular 15 + (Ainda não testado em outras versões mais antigas)
 
-Run `ng generate component component-name --project validacao-brasil` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project validacao-brasil`.
-> Note: Don't forget to add `--project validacao-brasil` or else it will be added to the default project in your `angular.json` file. 
+Este projeto foi testado somente com Angular 15 puro, mas não tem nenhuma dependência fora do próprio framework,
+todo o código foi criado com Typescript e Javascript puro para evitar outras dependências.
 
-## Build
+Atualmente tem as seguintes opções:
 
-Run `ng build validacao-brasil` to build the project. The build artifacts will be stored in the `dist/` directory.
+Validações:
+CPF
+CNPJ
+CEP
+Telefone
+Celular
 
-## Publishing
+Pipes:
+CPF
+CNPJ
+CEP
+Telefone
+Celular
 
-After building your library with `ng build validacao-brasil`, go to the dist folder `cd dist/validacao-brasil` and run `npm publish`.
+Diretivas:
+CPF
+CNPJ
+CEP
+Telefone
+Celular
 
-## Running unit tests
+Sobre Validações: 
 
-Run `ng test validacao-brasil` to execute the unit tests via [Karma](https://karma-runner.github.io).
+this.form = this.fb.group({
+      cpf: ['', ValidacaoBrasil.cpf()],
+      cnpj: ['', ValidacaoBrasil.cnpj()],
+      cep: ['', ValidacaoBrasil.cep()],
+      telefone: ['', ValidacaoBrasil.telefone(false)],
+      celular: ['', ValidacaoBrasil.celular(true, false)]
+});
 
-## Further help
+o primeiro parâmetro de todas as validações é se ele é "required" ou não.
+se for "required" e houver erro ira retorna um objeto { required: true }.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+para as outras validações será enviado um objeto com o nome da validação.
+Exemplo:
+
+cpf => { cpf: true }
+cnpj => { cnpj: true }
+cep => { cep: true }
+telefone => { telefone: true }
+celular => { celular: true }
+OBS: para o celular há uma validação adicional que é a verificação de começar com 9
+será enviado o objeto: { nove: true } quando ele não começar com 9.
+
+FIQUE ATENTO A VARIÁVEL "TEM DDD" E "DDD3DIGITOS" TANTO NO FORMS QUANTO NO ELEMENTO HTML SE FOR UTILIZAR MASCARA.
+
+No caso dos telefones há mais configurações disponíveis como:
+tem ddd?
+  segundo parâmetro (boolean)
+o ddd tem 3 dígitos?
+  terceiro parâmetro (boolean)
+  
+celular: ['', ValidacaoBrasil.celular(true, true, true)]
+
+![image](https://github.com/willianbello/validacao-brasil/assets/38074391/319825b4-bc9d-47a9-bf7f-219a3a9abacf)
+
+![image](https://github.com/willianbello/validacao-brasil/assets/38074391/c1b407e7-98a9-4e07-9c4d-2d34c0e49e6c)
+
+![image](https://github.com/willianbello/validacao-brasil/assets/38074391/440e9490-f790-42d4-a2ee-520df9a2d048)
+
+![image](https://github.com/willianbello/validacao-brasil/assets/38074391/6726d1fc-dad5-4f7a-a367-08d5bfb0fdf1)
+

@@ -29,7 +29,7 @@ export class CelularDirective {
     }
   }
 
-  private keyDown(event: KeyboardEvent) {
+  keyDown(event: KeyboardEvent) {
 
     const numeros = Utils.retornaSoNumero(this.el.nativeElement.value);
 
