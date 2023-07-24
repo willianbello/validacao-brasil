@@ -2,9 +2,18 @@
 
 Contem pipes / directives / validators / Angular
 
-Suporte para o Angular 15 + (Ainda não testado em outras versões mais antigas)
+Suporte para o Angular 12, 13, 14, 15 e 16
 
-Este projeto foi testado somente com Angular 15 puro, mas não tem nenhuma dependência fora do próprio framework,
+|  Versão Angular |  Versão Validacao-Brasil Compatível  |
+| ------------ | ------------ |
+| 12  | 12.2.1  |
+| 13  | 13.3.0  |
+| 14  | 14.2.1  |
+| 15  | 15.2.0  |
+| 16  | 16.1.0  |
+
+
+Este projeto foi testado somente com Angular 12, 13, 14, 15 e 16 puro, mas não tem nenhuma dependência fora do próprio framework,
 todo o código foi criado com Typescript e Javascript puro para evitar outras dependências.
 
 Atualmente tem as seguintes opções:
@@ -94,18 +103,17 @@ o ddd tem 3 dígitos?
 
     celular: ['', ValidacaoBrasil.celular(true, true, true)]
 
-
-      cpf: 48103288055 | {{ '48103288055' | cpf }}
-      cnpj: 76601670000125 | {{ '76601670000125' | cnpj }}
-      cep: 77064202 | {{ '77064202' | cep }}
-
-      telefone: 5131234567 | {{ '5131234567' | telefone }}
-      telefone: 05131234567 | {{ '05131234567' | telefone:true:true }}
-      telefone: 31234567 | {{ '31234567' | telefone:false }}
-
-      celular: 51991234567 | {{ '51991234567' | celular }}
-      celular: 051991234567 | {{ '051991234567' | celular:true:true }}
-      celular: 991234567 | {{ '991234567' | celular:false }}
+    cpf: 48103288055 | {{ '48103288055' | cpf }}
+    cnpj: 76601670000125 | {{ '76601670000125' | cnpj }}
+    cep: 77064202 | {{ '77064202' | cep }}
+    
+    telefone: 5131234567 | {{ '5131234567' | telefone }}
+    telefone: 05131234567 | {{ '05131234567' | telefone:true:true }}
+    telefone: 31234567 | {{ '31234567' | telefone:false }}
+    
+    celular: 51991234567 | {{ '51991234567' | celular }}
+    celular: 051991234567 | {{ '051991234567' | celular:true:true }}
+    celular: 991234567 | {{ '991234567' | celular:false }}
   
       <div>
           <p>Celular</p>
@@ -130,3 +138,4 @@ o ddd tem 3 dígitos?
           <span *ngIf="form.get('cep')?.hasError('cep')">cep inválido</span><br>
           <span *ngIf="form.get('cep')?.hasError('required')">cep requerido</span>
         </div>
+

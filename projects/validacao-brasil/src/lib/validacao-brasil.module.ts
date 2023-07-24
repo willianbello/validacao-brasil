@@ -27,7 +27,6 @@ import { CelularPipe } from './pipes/celular/celular.pipe';
     CelularPipe,
   ],
   imports: [
-    CommonModule,
   ],
   exports:[
     CpfDirective,
